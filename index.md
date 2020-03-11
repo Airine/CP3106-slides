@@ -31,12 +31,10 @@ _Tian Runxin, 2020.3.12_
 
 ---
 
-# Tools
+## Tools
 
 1. Geth - Go Ethereum: Official Go implementation of the Ethereum protocol.
-    ```shell
-    geth <other-options> --dev --dev.period 1 
-    ```
+    `geth <other-options> --dev --dev.period 1 # PoA`
 
 2. [Docker](#5)
 
