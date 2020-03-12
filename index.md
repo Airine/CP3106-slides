@@ -23,7 +23,7 @@ _Tian Runxin, 2020.3.12_
 
 2. [Demo](#11) & [Features](#7)
 
-3. Some progresses: [Utils](#13) and [Test](#14) cases
+3. Some progresså: [Utils](#13) and [Test](#14) cases
 
 3. [Problems](#16) 
 
