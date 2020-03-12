@@ -55,10 +55,9 @@ _Tian Runxin, 2020.3.12_
 
 # Docker
 
-- For deployment convenience, I buildup a docker container. With the tool, it can easily run the **PoA** blockchain network.
+- For deployment convenience, I builtup a docker container. With this tool, it can easily run the **PoA** blockchain network.
 
 #### Why PoA (Clique PoA consensus)
-- Fast
 - Allows blocks to be mined as-needed without excessive CPU and memory consumption.
 - Producing blocks when there are transactions waiting to be "mined".
 
