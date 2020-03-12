@@ -55,11 +55,11 @@ _Tian Runxin, 2020.3.12_
 
 # Docker
 
-- For deployment convenience, I builtup a docker container. With this tool, it can easily run the **PoA** blockchain network.
+- For deployment convenience, I builtup a docker container, which can easily run the **PoA** blockchain network.
 
 #### Why PoA (Clique PoA consensus)
-- Allows blocks to be mined as-needed without excessive CPU and memory consumption.
-- Producing blocks when there are transactions waiting to be "mined".
+- Allow blocks to be mined as-needed without excessive CPU and memory consumption.
+- Produce blocks when there are transactions waiting to be "mined".
 
 ---
 
@@ -144,7 +144,7 @@ for every user entering the system
 1. Can not run docker or geth on raspberry pi.
     - tried solutions: 
       1. install a 64-bit OS (failed)
-      2. reinstall OS (prepared)
+      2. reinstall OS (trying)
 
 2. Whether use a [new](http://dev.wifidog.org) wifi control framwork.
 
