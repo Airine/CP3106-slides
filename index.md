@@ -9,133 +9,41 @@ backgroundColor: #fff
 backgroundImage: url('https://marp.app/assets/hero-background.jpg')
 ---
 
-![bg left:50% 70%](https://media2.giphy.com/media/LHZyixOnHwDDy/giphy.gif)
 ![](src/wifi.png)
 WiFi bandwidth differetiation service using smart contract
 
-_Tian Runxin, 2020.3.12_
+_Tian Runxin, 2020.3.17_
 
 ----
 
 # Outline
 
-1. [Tools](#3) : The development tools I used.
+1. **Problems**
 
-2. [Demo](#11) & [Features](#7)
 
-3. Some progress: [Utils](#13) and [Test](#14) cases
-
-3. [Problems](#16) 
-
-4. [Plans](#18)
+2. **Plans**
 
 ---
 
-## Tools
+# All in one raspberry pi
 
-1. Geth - Go Ethereum: Official Go implementation of the Ethereum protocol.
-    `geth <other-options> --dev --dev.period 1 # PoA`
+- PoA node: provide PoA network
 
-2. [Docker](#5)
+- UI web server: serve the built website
 
-3. [Truffle](#6) Suite
-    - **Truffle**: the most popular development framework 
-    - Ganache: One click blockchain testnet.
-    - **Drizzle** (Font-end): Fast response. 
+- "WiFi Proxy": control the bandwidth
+
+- ~~Owner~~: connection between blockchain and WiFi Proxy.
 
 ---
 
-# Geth
-
-## Clique PoA consensus
-
-![](src/geth.png)
+![bg bottom:40% 90%](src/all-in-one.png)
 
 ---
 
-# Docker
+![bg left:90% 88%](src/web.png)
 
-- For deployment convenience, I builtup a docker container, which can easily run the **PoA** blockchain network.
-
-#### Why PoA (Clique PoA consensus)
-- Allow blocks to be mined as-needed without excessive CPU and memory consumption.
-- Produce blocks when there are transactions waiting to be "mined".
-
----
-
-# Truffle Suite
-
-1. Truffle: 
-Contract compilition, deployment, and testing.
-
-  ![bg left:50% 70%](src/image.png)
-
-2. Drizzle: 
-React-based font-end framework. 
-  (Fast response but buggy)
-
----
-
-# Features - Log in
-
-![](src/loginHD.gif)
-
-- Use `web3.eth.personal.unlockAccount` to verify the user.
-- Both `password` and `privatekey` are able to verify.
-
----
-
-# Features - Register
-
-![](src/registerHD.gif)
-
----
-
-![bg bottom:80% 80%](src/requestReject.gif)
-
----
-
-![bg 70% 70%](src/SYSInformation.png)
-
----
-
-![bg bottom:80% 80%](src/RequestSuccess.gif)
-
----
-
-# Features - Top up balance
-
-![](src/BalanceTopUp.gif)
-
----
-
-# Some Utils
-
-```
-scripts
-├── clear_allocation.js
-├── clear_balances.js
-├── get_balances.js
-├── get_num_users.js
-├── initial_balances.js
-├── pre_allocation.js
-└── target_allocation.js
-```
-
----
-
-### Test cases and result
-
-![image-20200312072422418](src/testcases.png)
-
----
-
-### Test result
-
-![image-20200312073609551](src/result.png)
-
-which means it takes around 450ms 
-for every user entering the system
+![bg right:100% 100%](src/proxy.png)
 
 ---
 
@@ -144,25 +52,64 @@ for every user entering the system
 1. Can not run docker or geth on raspberry pi.
     - tried solutions: 
       1. install a 64-bit OS (failed)
-      2. reinstall OS (trying)
-
-2. Whether use a [new](http://dev.wifidog.org) wifi control framwork.
+      2. reinstall OS (failed)
+      3. compile a linux executable `geth` (success)
 
 ---
 
-# WiFi Dog 
-- An open source captive portal solution. 
-(with DNS cache poisoning to redirect the user to authentication page )
-    1. Location-aware delivery of internal or external content
-    2. Authentication and authorization
-    3. Centralizaed network monitoring
+# Problems
 
-![bg left:40% 90%](https://www.maixj.net/pics/uploads/2015/06/WiFiDogFlowDiagram.png)
+2. Lack of `build-essential` while run owner.py
+```
+dpkg-dev fakeroot g++ g++-4.6 libalgorithm-diff-perl
+  libalgorithm-diff-xs-perl libalgorithm-merge-perl
+  libdpkg-perl libstdc++6-4.6-dev libtimedate-perl
+```
+
+```
+src/common.h:34:10: fatal error: stdio.h: No such file or directory
+  #include <stdio.h>
+          ^~~~~~~~~
+compilation terminated.
+error: command 'aarch64-linux-gnu-gcc' failed with exit status 1
+```
+---
+
+2. Lack of `build-essential`
+```
+root@raspbian:~/workspace/YourWiFi-v2# sudo apt-get install build-essential
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+Some packages could not be installed. This may mean that you have
+requested an impossible situation or if you are using the unstable
+distribution that some required packages have not yet been created
+or been moved out of Incoming.
+The following information may help to resolve the situation:
+
+The following packages have unmet dependencies:
+ build-essential : Depends: libc6-dev but it is not going to be installed or
+                            libc-dev
+                   Depends: g++ (>= 4:8.3) but it is not going to be installed
+E: Unable to correct problems, you have held broken packages.
+```
+---
+
+2. Lack of `build-essential`
+  possible solution: build executable
 
 ---
 
 # Plans
 
-1. solve the problems with raspberry pi
+1. ~~solve the problems with raspberry pi~~
 
 2. try the captive portal solution approach
+
+3. write the develop/deploy docs
+
+4. add top-up API (e.g. Paylah, Wechat, Alipay...)
+
+5. ...
+
+6. write report and make final slides
